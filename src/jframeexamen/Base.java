@@ -10,11 +10,20 @@ public class Base {
     private int posY;	//posicion en y.
     protected Animacion animacion;    //icono.
     private boolean moviendose;     //Booleano utilizado para saber si el objeto se esta moviendo
+    private static boolean choca;
 
     public Base(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
         moviendose = false;
+    }
+
+    public boolean getChoca() {
+        return choca;
+    }
+
+    public void setChoca(boolean c) {
+        choca = c;
     }
 
     public void setPosX(int posX) {
