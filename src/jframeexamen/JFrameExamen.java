@@ -64,8 +64,8 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
      */
     public void init() {
         setSize(800, 500);
-        acabarjuego=false;
-        contbloques=59;
+        acabarjuego = false;
+        contbloques = 59;
         lista = new LinkedList();
         lista2 = new LinkedList();
         lista3 = new LinkedList();
@@ -137,10 +137,10 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         fondo = Toolkit.getDefaultToolkit().getImage(fURL).getScaledInstance(getWidth(), getHeight(), 1);
         URL aURL= this.getClass().getResource("pill/impulso.png");
         ganador= Toolkit.getDefaultToolkit().getImage(aURL);
-        URL gURL=this.getClass().getResource("pill/pausa.png");
+        URL gURL=this.getClass().getResource("pill/imagenpausa.jpg");
         pause=Toolkit.getDefaultToolkit().getImage(gURL);
         instrucciones = false;
-        
+
     }
 
     /**
@@ -321,12 +321,15 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         }
 
         if (bola.intersecta(bar)) {
+            if (bola.getPosY() + bola.getAlto()/2 < bar.getPosY() + bar.getAlto()/2) 
+                bola.setVelY(-bola.getVelY());
+            
             if (bola.getPosX() + bola.getAncho() / 2 > bar.getPosX() + bar.getAncho() / 2 && bola.getVelX() < 0) {
                 bola.setVelX(-bola.getVelX());
             } else if (bola.getPosX() + bola.getAncho() / 2 < bar.getPosX() + bar.getAncho() / 2 && bola.getVelX() > 0) {
                 bola.setVelX(-bola.getVelX());
             }
-            bola.setVelY(-bola.getVelY());
+
         }
 
         if (bola.getPosX() < 5) {
@@ -347,6 +350,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 bola.setVelX((int) (Math.random() * 10) - 5);
             }
             bola.setVelY(-4);
+            snake.play();
         }
     }
 
@@ -423,8 +427,6 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     public void keyReleased(KeyEvent e) {
         move = false;
         bar.setMoviendose(false);
-        if (e.getKeyCode() == KeyEvent.VK_G) {
-        }
     }
 
     /**
@@ -532,7 +534,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 //        g.drawString(pill.getPausado(), pill.getPosX() + pill.getAncho() / 3, pill.getPosY() + pill.getAlto() / 2);
                 //    }
                 if(pausa){
-                g.drawImage(pause,0,0,this);
+                g.drawImage(pause,0,20,this);
                 }
                 if (instrucciones) {
                     g.drawString("Instrucciones:", 20, 90);
@@ -543,20 +545,19 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
 
                 }
 
-                
             } else {
                 //Da un mensaje mientras se carga el dibujo	
                 g.drawString("No se cargo la imagen..", 20, 20);
             }
 
         } else {
-            g.drawImage(game_over, getWidth() / 5, 0, this);
+            g.drawImage(game_over,0, 20, this);
         }
-        if(contbloques==60){
-             acabarjuego=true;
-             musicafondo= true;
-             g.drawImage(ganador, 0,0,this);
-         }
+        if (contbloques == 60) {
+            acabarjuego = true;
+            musicafondo = true;
+            g.drawImage(ganador, 0, 20, this);
+        }
     }
 
 }
