@@ -11,7 +11,7 @@ import java.awt.Toolkit;
         
     public Barra1(int posX,int posY){
 	super(posX,posY);	
-        Image malo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("barra/barra.png"));
+        Image malo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("barra/barra.png")).getScaledInstance(80, 18, posY);
         animacion = new Animacion();
         animacion.sumaCuadro(malo1, 100);
 

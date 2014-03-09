@@ -35,7 +35,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     private boolean move;
     private boolean pausa;
     private long tiempoActual;
-    
+
     private boolean instrucciones;
 
     private LinkedList<Bloque> lista;
@@ -226,8 +226,8 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 if (i.getPosY() < bola.getPosY() + bola.getAlto() || i.getPosY() + i.getAlto() > bola.getPosY()) { //por arriba o por abajo
                     bola.setVelY(-bola.getVelY());
                     i.addGolpe();
-                    if(i.getGolpes()==3){
-                    lista.remove(i);
+                    if (i.getGolpes() == 3) {
+                        lista.remove(i);
                     }
                     i.cambiaimagen(i.getGolpes());
                 } else {                                                                                           //por la izquierda o la derecha
@@ -243,15 +243,15 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 if (i.getPosY() < bola.getPosY() + bola.getAlto() || i.getPosY() + i.getAlto() > bola.getPosY()) { //por arriba o por abajo
                     bola.setVelY(-bola.getVelY());
                     i.addGolpe();
-                    if(i.getGolpes()==3){
-                    lista2.remove(i);
+                    if (i.getGolpes() == 3) {
+                        lista2.remove(i);
                     }
                     i.cambiaimagen(i.getGolpes());
                 } else {                                                                                           //por la izquierda o la derecha
                     bola.setVelX(-bola.getVelX());
                 }
 
-            } else if( !bola.intersecta(i)){
+            } else if (!bola.intersecta(i)) {
                 i.setChoca(false);
             }
         }
@@ -261,11 +261,11 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 if (i.getPosY() < bola.getPosY() + bola.getAlto() || i.getPosY() + i.getAlto() > bola.getPosY()) { //por arriba o por abajo
                     bola.setVelY(-bola.getVelY());
                     i.addGolpe();
-                    if(i.getGolpes()==3){
-                    lista3.remove(i);
+                    if (i.getGolpes() == 3) {
+                        lista3.remove(i);
                     }
                     i.cambiaimagen(i.getGolpes());
-                } else if( !bola.intersecta(i)){                                                                                           //por la izquierda o la derecha
+                } else if (!bola.intersecta(i)) {                                                                                           //por la izquierda o la derecha
                     bola.setVelX(-bola.getVelX());
                 }
 
@@ -279,19 +279,24 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 if (i.getPosY() < bola.getPosY() + bola.getAlto() || i.getPosY() + i.getAlto() > bola.getPosY()) { //por arriba o por abajo
                     bola.setVelY(-bola.getVelY());
                     i.addGolpe();
-                    if(i.getGolpes()==3){
-                    lista4.remove(i);
+                    if (i.getGolpes() == 3) {
+                        lista4.remove(i);
                     }
                     i.cambiaimagen(i.getGolpes());
                 } else {                                                                                           //por la izquierda o la derecha
                     bola.setVelX(-bola.getVelX());
                 }
-            } else if( !bola.intersecta(i)){
+            } else if (!bola.intersecta(i)) {
                 i.setChoca(false);
             }
         }
 
         if (bola.intersecta(bar)) {
+            if (bola.getPosX() + bola.getAncho() / 2 > bar.getPosX() + bar.getAncho() / 2 && bola.getVelX() < 0) {
+               bola.setVelX(-bola.getVelX());
+            } else if (bola.getPosX() + bola.getAncho() / 2 <bar.getPosX() + bar.getAncho() / 2 && bola.getVelX() > 0) {
+                bola.setVelX(-bola.getVelX());
+            }
             bola.setVelY(-bola.getVelY());
         }
 
@@ -356,7 +361,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
 
         } else if (e.getKeyCode() == KeyEvent.VK_I) {
             instrucciones = !instrucciones;
-        } 
+        }
     }
 
     public void keyTyped(KeyEvent e) {
@@ -386,7 +391,6 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
      * @param e es el evento generado al ocurrir lo descrito.
      */
     public void mouseClicked(MouseEvent e) {
-
 
     }
 
