@@ -81,7 +81,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         snake = new SoundClip("sounds/tazdingo.mp3");
         waka = new SoundClip("sounds/waka.wav");
         bar = new Barra1(getWidth() / 2, getHeight() - 30);
-        bar.setPosX(getWidth()/2 - bar.getAncho()/2);
+        bar.setPosX(getWidth() / 2 - bar.getAncho() / 2);
         setBackground(Color.black);
         addKeyListener(this);
         addMouseListener(this);
@@ -136,10 +136,10 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         game_over = Toolkit.getDefaultToolkit().getImage(goURL);
         URL fURL = this.getClass().getResource("Fondo/FondoDos.jpg");
         fondo = Toolkit.getDefaultToolkit().getImage(fURL).getScaledInstance(getWidth(), getHeight(), 1);
-        URL aURL= this.getClass().getResource("pill/impulso.png");
-        ganador= Toolkit.getDefaultToolkit().getImage(aURL);
-        URL gURL=this.getClass().getResource("pill/imagenpausa.jpg");
-        pause=Toolkit.getDefaultToolkit().getImage(gURL);
+        URL aURL = this.getClass().getResource("pill/impulso.png");
+        ganador = Toolkit.getDefaultToolkit().getImage(aURL);
+        URL gURL = this.getClass().getResource("pill/imagenpausa.jpg");
+        pause = Toolkit.getDefaultToolkit().getImage(gURL);
         instrucciones = false;
 
     }
@@ -322,9 +322,10 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         }
 
         if (bola.intersecta(bar)) {
-            if (bola.getPosY() + bola.getAlto()/2 < bar.getPosY() + bar.getAlto()/2) 
+            if (bola.getPosY() + bola.getAlto() / 2 < bar.getPosY() + bar.getAlto() / 2) {
                 bola.setVelY(-bola.getVelY());
-            
+            }
+
             if (bola.getPosX() + bola.getAncho() / 2 > bar.getPosX() + bar.getAncho() / 2 && bola.getVelX() < 0) {
                 bola.setVelX(-bola.getVelX());
             } else if (bola.getPosX() + bola.getAncho() / 2 < bar.getPosX() + bar.getAncho() / 2 && bola.getVelX() > 0) {
@@ -342,8 +343,6 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         } else if (bola.getPosY() > getHeight()) {
             vidas--;
             moverbola = false;
-            bar.setPosX(getWidth() / 2);
-            bar.setPosY(getHeight() - 30);
             bola.setPosX(bar.getPosX() + 20);
             bola.setPosY(bar.getPosY() - 30);
             bola.setVelX(0);
@@ -400,7 +399,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
             direccion = 4;
             move = true;
         } else if (e.getKeyCode() == KeyEvent.VK_P) {
-            musicafondo=true;
+            musicafondo = true;
             pausa = !pausa;
         } else if (e.getKeyCode() == KeyEvent.VK_S && !pausa) {
             musicafondo = !musicafondo;
@@ -412,7 +411,61 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 moverbola = true;
             }
         } else if (e.getKeyCode() == KeyEvent.VK_R) {
-            init();
+            musicafondo=false;
+            bar.setPosX(getWidth()/2);
+            bar.setPosY(getHeight()-30);
+            bola.setPosX(bar.getPosX() + 25);
+            bola.setPosY(bar.getPosY() - 25);
+            contbloques=0;
+            vidas=3;
+            lista.clear();
+            lista2.clear();
+            lista3.clear();
+            lista4.clear();
+             for (int i = 1; i < 15; i++) {
+            if (i == 1) {
+                pill = new Bloque(40, 70);
+                lista.add(pill);
+            } else {
+                Bloque pillaux = (Bloque) lista.get(i - 2);
+                pill = new Bloque(pillaux.getPosX() + 50, pillaux.getPosY());
+                lista.add(pill);
+            }
+
+        }
+        for (int i = 1; i < 15; i++) {
+            if (i == 1) {
+                pillR = new BloqueR(40, 120);
+                lista2.add(pillR);
+            } else {
+                BloqueR pillaux = (BloqueR) lista2.get(i - 2);
+                pillR = new BloqueR(pillaux.getPosX() + 50, pillaux.getPosY());
+                lista2.add(pillR);
+            }
+
+        }
+        for (int i = 1; i < 15; i++) {
+            if (i == 1) {
+                pill = new Bloque(40, 170);
+                lista3.add(pill);
+            } else {
+                Bloque pillaux = (Bloque) lista3.get(i - 2);
+                pill = new Bloque(pillaux.getPosX() + 50, pillaux.getPosY());
+                lista3.add(pill);
+            }
+
+        }
+        for (int i = 1; i < 15; i++) {
+            if (i == 1) {
+                pillR = new BloqueR(40, 220);
+                lista4.add(pillR);
+            } else {
+                BloqueR pillaux = (BloqueR) lista4.get(i - 2);
+                pillR = new BloqueR(pillaux.getPosX() + 50, pillaux.getPosY());
+                lista4.add(pillR);
+            }
+
+        }
         }
     }
 
@@ -535,8 +588,8 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 //        g.setColor(Color.white);
                 //        g.drawString(pill.getPausado(), pill.getPosX() + pill.getAncho() / 3, pill.getPosY() + pill.getAlto() / 2);
                 //    }
-                if(pausa){
-                g.drawImage(pause,0,20,this);
+                if (pausa) {
+                    g.drawImage(pause, 0, 20, this);
                 }
                 if (instrucciones) {
                     g.drawString("Instrucciones:", 20, 90);
@@ -553,7 +606,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
             }
 
         } else {
-            g.drawImage(game_over,0, 20, this);
+            g.drawImage(game_over, 0, 20, this);
         }
         if (contbloques == 60) {
             acabarjuego = true;
