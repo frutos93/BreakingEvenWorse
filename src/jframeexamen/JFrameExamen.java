@@ -35,8 +35,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     private boolean move;
     private boolean pausa;
     private long tiempoActual;
-    private boolean puedoDisparar;
-    private int angulo;
+    
     private boolean instrucciones;
 
     private LinkedList<Bloque> lista;
@@ -153,7 +152,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
      *
      */
     public void run() {
-        tiempoActual = System.currentTimeMillis();
+
         while (vidas > 0) {
             if (musicafondo) {
                 payaso.stop();
@@ -367,11 +366,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
      * @param e es el evento generado al ocurrir lo descrito.
      */
     public void mouseClicked(MouseEvent e) {
-        if (!puedoDisparar) {
-            if (pill.contiene(e.getX(), e.getY())) {
-                puedoDisparar = true;
-            }
-        }
+
 
     }
 
