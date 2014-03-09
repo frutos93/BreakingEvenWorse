@@ -33,6 +33,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     private int vidas;
     private Image game_over;        //Imagen de Game-over
     private Image ganador;
+    private Image pause;
     private int direccion;          //Variable para la dirección del personaje
     private int score;
     private boolean move;
@@ -136,6 +137,8 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         fondo = Toolkit.getDefaultToolkit().getImage(fURL).getScaledInstance(getWidth(), getHeight(), 1);
         URL aURL= this.getClass().getResource("pill/impulso.png");
         ganador= Toolkit.getDefaultToolkit().getImage(aURL);
+        URL gURL=this.getClass().getResource("pill/pausa.png");
+        pause=Toolkit.getDefaultToolkit().getImage(gURL);
         instrucciones = false;
         
     }
@@ -392,6 +395,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
             direccion = 4;
             move = true;
         } else if (e.getKeyCode() == KeyEvent.VK_P) {
+            musicafondo=true;
             pausa = !pausa;
         } else if (e.getKeyCode() == KeyEvent.VK_S && !pausa) {
             musicafondo = !musicafondo;
@@ -403,7 +407,6 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 moverbola = true;
             }
         } else if(e.getKeyCode() == KeyEvent.VK_R){
-            init();
         }
     }
 
@@ -528,6 +531,9 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 //        g.setColor(Color.white);
                 //        g.drawString(pill.getPausado(), pill.getPosX() + pill.getAncho() / 3, pill.getPosY() + pill.getAlto() / 2);
                 //    }
+                if(pausa){
+                g.drawImage(pause,0,0,this);
+                }
                 if (instrucciones) {
                     g.drawString("Instrucciones:", 20, 90);
                     g.drawString("Presiona la ", 20, 110);
