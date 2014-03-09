@@ -32,7 +32,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     private boolean acabarjuego;
     private int vidas;
     private Image game_over;        //Imagen de Game-over
-    private Image ganador;
+    private Image perder;
     private Image pause;
     private int direccion;          //Variable para la dirección del personaje
     private int score;
@@ -137,7 +137,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         URL fURL = this.getClass().getResource("Fondo/FondoDos.jpg");
         fondo = Toolkit.getDefaultToolkit().getImage(fURL).getScaledInstance(getWidth(), getHeight(), 1);
         URL aURL = this.getClass().getResource("pill/impulso.png");
-        ganador = Toolkit.getDefaultToolkit().getImage(aURL);
+        perder = Toolkit.getDefaultToolkit().getImage(aURL);
         URL gURL = this.getClass().getResource("pill/imagenpausa.jpg");
         pause = Toolkit.getDefaultToolkit().getImage(gURL);
         instrucciones = false;
@@ -166,8 +166,8 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
      *
      */
     public void run() {
-
-        while (vidas > 0 && !acabarjuego) {
+        
+        while (true) {
             if (musicafondo) {
                 guile.stop();
                 guile.setLooping(false);
@@ -412,6 +412,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
             }
         } else if (e.getKeyCode() == KeyEvent.VK_R) {
             musicafondo=false;
+            pausa=false;
             bar.setPosX(getWidth()/2);
             bar.setPosY(getHeight()-30);
             bola.setPosX(bar.getPosX() + 25);
@@ -606,12 +607,11 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
             }
 
         } else {
-            g.drawImage(game_over, 0, 20, this);
+             g.drawImage(perder, 0, 20, this);
         }
         if (contbloques == 60) {
             acabarjuego = true;
             musicafondo = true;
-            g.drawImage(ganador, 0, 20, this);
         }
     }
 
