@@ -402,6 +402,8 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
             if (!moverbola) {
                 moverbola = true;
             }
+        } else if(e.getKeyCode() == KeyEvent.VK_R){
+            init();
         }
     }
 
