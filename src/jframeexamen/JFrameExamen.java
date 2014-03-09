@@ -74,7 +74,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         direccion = 0;
         score = 0;                    //puntaje inicial
         vidas = 3;                    //vidaas iniciales
-        payaso = new SoundClip("sounds/pashaso.wav");
+        payaso = new SoundClip("sounds/XkyGuile.mid");
         snake = new SoundClip("sounds/snake.wav");
         waka = new SoundClip("sounds/waka.wav");
         bar = new Barra1(getWidth() / 2, getHeight() - 30);
@@ -146,6 +146,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     public void start() {
         // Declaras un hilo
         payaso.setLooping(true);
+        payaso.play();
         Thread th = new Thread(this);
         // Empieza el hilo
         th.start();
