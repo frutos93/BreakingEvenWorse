@@ -7,10 +7,9 @@ public class Bloque extends Base {
 
     private int golpes;
 
-
     public Bloque(int posX, int posY) {
         super(posX, posY);
-        Image bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("pill/green pill 1.png"));
+        Image bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("pill/green pill 1.png")).getScaledInstance(40, 32, 1);
         animacion = new Animacion();
         animacion.sumaCuadro(bueno1, 100);
         golpes = 0;
@@ -27,8 +26,6 @@ public class Bloque extends Base {
         return DESAPARECE;
     }
 
-
-
     public int getGolpes() {
         return golpes;
     }
@@ -37,17 +34,20 @@ public class Bloque extends Base {
         golpes++;
 
     }
-    public void cambiaimagen(int gp){
-        if(gp==1){
-        Image bueno1; bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("pill/green pill 2.png"));               
-        animacion = new Animacion();
-        animacion.sumaCuadro(bueno1, 100);
-        }
-        if(gp==2){
-        Image bueno1; bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("pill/green pill 3.png"));               
-        animacion = new Animacion();
-        animacion.sumaCuadro(bueno1, 100);
 
-    }
+    public void cambiaimagen(int gp) {
+        if (gp == 1) {
+            Image bueno1;
+            bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("pill/green pill 2.png")).getScaledInstance(40, 32, 1);
+            animacion = new Animacion();
+            animacion.sumaCuadro(bueno1, 100);
+        }
+        if (gp == 2) {
+            Image bueno1;
+            bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("pill/green pill 3.png")).getScaledInstance(40, 32, 1);
+            animacion = new Animacion();
+            animacion.sumaCuadro(bueno1, 100);
+
+        }
     }
 }
