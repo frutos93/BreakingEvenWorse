@@ -593,11 +593,11 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 }
                 if (instrucciones) {
                     g.drawString("Instrucciones:", 20, 90);
-                    g.drawString("Presiona la ", 20, 110);
-                    g.drawString("Para mover la mano, presiona las teclas de flecha izquierda o derecha.", 20, 130);
-                    g.drawString("Presiona G para guardar tu partida, C para cargar, P para pausar y S para detener la musica.", 20, 150);
-                    g.drawString("Si el personaje cae tres veces, perderas una vida y la dificultad aumentara.", 20, 170);
-
+                    g.drawString("Para mover la barra, presiona las teclas de flecha izquierda o derecha.", 20, 110);
+                    g.drawString("Presiona R para reiniciar la partida, P para pausar y S para detener la musica.", 20, 130);
+                    g.drawString("Si la pastilla cae 3 veces pierdes el juego.", 20, 150);
+                    g.drawString("La pastilla tiene que golpear tres veces a cada bloque para destruirlos.", 20, 170);
+                    g.drawString("Ganas el juego al haber destruido todos los bloques.", 20, 190);
                 }
 
             } else {
