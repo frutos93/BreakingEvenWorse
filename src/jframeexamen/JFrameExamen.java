@@ -67,7 +67,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         lista4 = new LinkedList();
         pausa = false;
         move = false;
-        moverbola= false;
+        moverbola = false;
         musicafondo = false;
         direccion = 0;
         score = 0;                    //puntaje inicial
@@ -206,13 +206,12 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 }
             }
         }
-        if(moverbola){
-        bola.setPosX(bola.getPosX() + bola.getVelX());
-        bola.setPosY(bola.getPosY() + bola.getVelY());
-        }
-        else{
-        bola.setPosX(bar.getPosX()+20);
-        bola.setPosY(bar.getPosY()-30);
+        if (moverbola) {
+            bola.setPosX(bola.getPosX() + bola.getVelX());
+            bola.setPosY(bola.getPosY() + bola.getVelY());
+        } else {
+            bola.setPosX(bar.getPosX() + 20);
+            bola.setPosY(bar.getPosY() - 30);
         }
     }
 
@@ -232,14 +231,15 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 i.setChoca(true);
                 if (i.getPosY() < bola.getPosY() + bola.getAlto() || i.getPosY() + i.getAlto() > bola.getPosY()) { //por arriba o por abajo
                     bola.setVelY(-bola.getVelY());
-                    i.addGolpe();
-                    if (i.getGolpes() == 3) {
-                        lista.remove(i);
-                    }
-                    i.cambiaimagen(i.getGolpes());
                 } else {                                                                                           //por la izquierda o la derecha
                     bola.setVelX(-bola.getVelX());
                 }
+                i.addGolpe();
+                if (i.getGolpes() == 3) {
+                    lista.remove(i);
+                    continue;
+                }
+                i.cambiaimagen(i.getGolpes());
             } else {
                 i.setChoca(false);
             }
@@ -249,14 +249,15 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 i.setChoca(true);
                 if (i.getPosY() < bola.getPosY() + bola.getAlto() || i.getPosY() + i.getAlto() > bola.getPosY()) { //por arriba o por abajo
                     bola.setVelY(-bola.getVelY());
-                    i.addGolpe();
-                    if (i.getGolpes() == 3) {
-                        lista2.remove(i);
-                    }
-                    i.cambiaimagen(i.getGolpes());
                 } else {                                                                                           //por la izquierda o la derecha
                     bola.setVelX(-bola.getVelX());
                 }
+                i.addGolpe();
+                if (i.getGolpes() == 3) {
+                    lista2.remove(i);
+                    continue;
+                }
+                i.cambiaimagen(i.getGolpes());
 
             } else if (!bola.intersecta(i)) {
                 i.setChoca(false);
@@ -267,14 +268,16 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 i.setChoca(true);
                 if (i.getPosY() < bola.getPosY() + bola.getAlto() || i.getPosY() + i.getAlto() > bola.getPosY()) { //por arriba o por abajo
                     bola.setVelY(-bola.getVelY());
-                    i.addGolpe();
-                    if (i.getGolpes() == 3) {
-                        lista3.remove(i);
-                    }
-                    i.cambiaimagen(i.getGolpes());
+
                 } else if (!bola.intersecta(i)) {                                                                                           //por la izquierda o la derecha
                     bola.setVelX(-bola.getVelX());
                 }
+                i.addGolpe();
+                if (i.getGolpes() == 3) {
+                    lista3.remove(i);
+                    continue;
+                }
+                i.cambiaimagen(i.getGolpes());
 
             } else {
                 i.setChoca(false);
@@ -285,14 +288,16 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 i.setChoca(true);
                 if (i.getPosY() < bola.getPosY() + bola.getAlto() || i.getPosY() + i.getAlto() > bola.getPosY()) { //por arriba o por abajo
                     bola.setVelY(-bola.getVelY());
-                    i.addGolpe();
-                    if (i.getGolpes() == 3) {
-                        lista4.remove(i);
-                    }
-                    i.cambiaimagen(i.getGolpes());
+
                 } else {                                                                                           //por la izquierda o la derecha
                     bola.setVelX(-bola.getVelX());
                 }
+                i.addGolpe();
+                if (i.getGolpes() == 3) {
+                    lista4.remove(i);
+                    continue;
+                }
+                i.cambiaimagen(i.getGolpes());
             } else if (!bola.intersecta(i)) {
                 i.setChoca(false);
             }
@@ -300,8 +305,8 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
 
         if (bola.intersecta(bar)) {
             if (bola.getPosX() + bola.getAncho() / 2 > bar.getPosX() + bar.getAncho() / 2 && bola.getVelX() < 0) {
-               bola.setVelX(-bola.getVelX());
-            } else if (bola.getPosX() + bola.getAncho() / 2 <bar.getPosX() + bar.getAncho() / 2 && bola.getVelX() > 0) {
+                bola.setVelX(-bola.getVelX());
+            } else if (bola.getPosX() + bola.getAncho() / 2 < bar.getPosX() + bar.getAncho() / 2 && bola.getVelX() > 0) {
                 bola.setVelX(-bola.getVelX());
             }
             bola.setVelY(-bola.getVelY());
@@ -313,13 +318,13 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
             bola.setVelY(-bola.getVelY());
         } else if (bola.getPosX() + bola.getAncho() > getWidth()) {
             bola.setVelX(-bola.getVelX());
-        } else if(bola.getPosY()>getHeight()){
+        } else if (bola.getPosY() > getHeight()) {
             vidas--;
-            moverbola=false;
+            moverbola = false;
             bar.setPosX(getWidth() / 2);
             bar.setPosY(getHeight() - 30);
-            bola.setPosX(bar.getPosX()+20);
-            bola.setPosY(bar.getPosY()-30);
+            bola.setPosX(bar.getPosX() + 20);
+            bola.setPosY(bar.getPosY() - 30);
         }
     }
 
@@ -374,10 +379,10 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
 
         } else if (e.getKeyCode() == KeyEvent.VK_I) {
             instrucciones = !instrucciones;
-        } else if(e.getKeyCode() == KeyEvent.VK_SPACE){
-            if(!moverbola){
-                moverbola= true;
-            }    
+        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            if (!moverbola) {
+                moverbola = true;
+            }
         }
     }
 
