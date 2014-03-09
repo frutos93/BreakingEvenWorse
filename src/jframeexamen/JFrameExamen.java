@@ -61,8 +61,8 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
      */
     public void init() {
         setSize(800, 500);
-        acabarjuego = false;
-        contbloques = 0;
+        //acabarjuego = false;
+        contbloques = 0;//oli
         lista = new LinkedList();
         lista2 = new LinkedList();
         lista3 = new LinkedList();
@@ -74,7 +74,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         direccion = 0;
         score = 0;                    //puntaje inicial
         vidas = 3;                    //vidaas iniciales
-        guile = new SoundClip("sounds/SF2Guile.mid");
+        guile = new SoundClip("sounds/guile.wav");
         bar = new Barra1(getWidth() / 2, getHeight() - 30);
         bar.setPosX(getWidth() / 2 - bar.getAncho() / 2);
         setBackground(Color.black);
@@ -610,7 +610,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
              g.drawImage(perder, 140, 20, this); //Cuando pierdes se despliega la pantalla de perder
         }
         if (contbloques == 60) { //Cuando ganas se despliega la pantalla de creditos
-            acabarjuego = true;
+            //acabarjuego = true;
             musicafondo = true;
             g.drawImage(game_over,0,20,this);
             
