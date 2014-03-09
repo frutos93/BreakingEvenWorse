@@ -41,7 +41,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     private boolean moverbola;
     private long tiempoActual;
     private boolean instrucciones;
-
+    private boolean empezar;
     private LinkedList<Bloque> lista;
     private LinkedList<BloqueR> lista2;
     private LinkedList<Bloque> lista3;
@@ -141,6 +141,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         URL gURL = this.getClass().getResource("pill/imagenpausa.jpg");
         pause = Toolkit.getDefaultToolkit().getImage(gURL);
         instrucciones = false;
+        empezar = false;
 
     }
 
@@ -401,6 +402,8 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         } else if (e.getKeyCode() == KeyEvent.VK_P) {
             musicafondo = true;
             pausa = !pausa;
+        } else if (e.getKeyCode() == KeyEvent.VK_E && !empezar) {
+            empezar = true;
         } else if (e.getKeyCode() == KeyEvent.VK_S && !pausa) {
             musicafondo = !musicafondo;
 
@@ -411,61 +414,61 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 moverbola = true;
             }
         } else if (e.getKeyCode() == KeyEvent.VK_R) {
-            musicafondo=false;
-            bar.setPosX(getWidth()/2);
-            bar.setPosY(getHeight()-30);
+            musicafondo = false;
+            bar.setPosX(getWidth() / 2);
+            bar.setPosY(getHeight() - 30);
             bola.setPosX(bar.getPosX() + 25);
             bola.setPosY(bar.getPosY() - 25);
-            contbloques=0;
-            vidas=3;
+            contbloques = 0;
+            vidas = 3;
             lista.clear();
             lista2.clear();
             lista3.clear();
             lista4.clear();
-             for (int i = 1; i < 15; i++) {
-            if (i == 1) {
-                pill = new Bloque(40, 70);
-                lista.add(pill);
-            } else {
-                Bloque pillaux = (Bloque) lista.get(i - 2);
-                pill = new Bloque(pillaux.getPosX() + 50, pillaux.getPosY());
-                lista.add(pill);
-            }
+            for (int i = 1; i < 15; i++) {
+                if (i == 1) {
+                    pill = new Bloque(40, 70);
+                    lista.add(pill);
+                } else {
+                    Bloque pillaux = (Bloque) lista.get(i - 2);
+                    pill = new Bloque(pillaux.getPosX() + 50, pillaux.getPosY());
+                    lista.add(pill);
+                }
 
-        }
-        for (int i = 1; i < 15; i++) {
-            if (i == 1) {
-                pillR = new BloqueR(40, 120);
-                lista2.add(pillR);
-            } else {
-                BloqueR pillaux = (BloqueR) lista2.get(i - 2);
-                pillR = new BloqueR(pillaux.getPosX() + 50, pillaux.getPosY());
-                lista2.add(pillR);
             }
+            for (int i = 1; i < 15; i++) {
+                if (i == 1) {
+                    pillR = new BloqueR(40, 120);
+                    lista2.add(pillR);
+                } else {
+                    BloqueR pillaux = (BloqueR) lista2.get(i - 2);
+                    pillR = new BloqueR(pillaux.getPosX() + 50, pillaux.getPosY());
+                    lista2.add(pillR);
+                }
 
-        }
-        for (int i = 1; i < 15; i++) {
-            if (i == 1) {
-                pill = new Bloque(40, 170);
-                lista3.add(pill);
-            } else {
-                Bloque pillaux = (Bloque) lista3.get(i - 2);
-                pill = new Bloque(pillaux.getPosX() + 50, pillaux.getPosY());
-                lista3.add(pill);
             }
+            for (int i = 1; i < 15; i++) {
+                if (i == 1) {
+                    pill = new Bloque(40, 170);
+                    lista3.add(pill);
+                } else {
+                    Bloque pillaux = (Bloque) lista3.get(i - 2);
+                    pill = new Bloque(pillaux.getPosX() + 50, pillaux.getPosY());
+                    lista3.add(pill);
+                }
 
-        }
-        for (int i = 1; i < 15; i++) {
-            if (i == 1) {
-                pillR = new BloqueR(40, 220);
-                lista4.add(pillR);
-            } else {
-                BloqueR pillaux = (BloqueR) lista4.get(i - 2);
-                pillR = new BloqueR(pillaux.getPosX() + 50, pillaux.getPosY());
-                lista4.add(pillR);
             }
+            for (int i = 1; i < 15; i++) {
+                if (i == 1) {
+                    pillR = new BloqueR(40, 220);
+                    lista4.add(pillR);
+                } else {
+                    BloqueR pillaux = (BloqueR) lista4.get(i - 2);
+                    pillR = new BloqueR(pillaux.getPosX() + 50, pillaux.getPosY());
+                    lista4.add(pillR);
+                }
 
-        }
+            }
         }
     }
 
@@ -557,7 +560,9 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
      * @paramg es el <code>objeto grafico</code> usado para dibujar.
      */
     public void paint1(Graphics g) {
-        if (vidas > 0) {
+        if (!empezar) {
+
+        } else if (vidas > 0) {
             g.drawImage(fondo, 0, 0, this);
             if (lista != null && bar != null) {
                 for (Bloque i : lista) {
