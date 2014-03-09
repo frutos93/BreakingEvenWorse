@@ -225,6 +225,11 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 i.setChoca(true);
                 if (i.getPosY() < bola.getPosY() + bola.getAlto() || i.getPosY() + i.getAlto() > bola.getPosY()) { //por arriba o por abajo
                     bola.setVelY(-bola.getVelY());
+                    i.addGolpe();
+                    if(i.getGolpes()==3){
+                    lista.remove(i);
+                    }
+                    i.cambiaimagen(i.getGolpes());
                 } else {                                                                                           //por la izquierda o la derecha
                     bola.setVelX(-bola.getVelX());
                 }
@@ -237,6 +242,11 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 i.setChoca(true);
                 if (i.getPosY() < bola.getPosY() + bola.getAlto() || i.getPosY() + i.getAlto() > bola.getPosY()) { //por arriba o por abajo
                     bola.setVelY(-bola.getVelY());
+                    i.addGolpe();
+                    if(i.getGolpes()==3){
+                    lista2.remove(i);
+                    }
+                    i.cambiaimagen(i.getGolpes());
                 } else {                                                                                           //por la izquierda o la derecha
                     bola.setVelX(-bola.getVelX());
                 }
@@ -250,6 +260,11 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 i.setChoca(true);
                 if (i.getPosY() < bola.getPosY() + bola.getAlto() || i.getPosY() + i.getAlto() > bola.getPosY()) { //por arriba o por abajo
                     bola.setVelY(-bola.getVelY());
+                    i.addGolpe();
+                    if(i.getGolpes()==3){
+                    lista3.remove(i);
+                    }
+                    i.cambiaimagen(i.getGolpes());
                 } else if( !bola.intersecta(i)){                                                                                           //por la izquierda o la derecha
                     bola.setVelX(-bola.getVelX());
                 }
@@ -263,6 +278,11 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 i.setChoca(true);
                 if (i.getPosY() < bola.getPosY() + bola.getAlto() || i.getPosY() + i.getAlto() > bola.getPosY()) { //por arriba o por abajo
                     bola.setVelY(-bola.getVelY());
+                    i.addGolpe();
+                    if(i.getGolpes()==3){
+                    lista4.remove(i);
+                    }
+                    i.cambiaimagen(i.getGolpes());
                 } else {                                                                                           //por la izquierda o la derecha
                     bola.setVelX(-bola.getVelX());
                 }

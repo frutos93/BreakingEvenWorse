@@ -41,5 +41,26 @@ package jframeexamen;
     public int getGolpes(){
     return golpes;
     }
+        public void addGolpe() {
+        golpes++;
+
+       }
+    public void cambiaimagen(int gp){
+        if(gp==1){
+        Image bueno1; bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("pill/red pill 2.png"));               
+        animacion = new Animacion();
+        animacion.sumaCuadro(bueno1, 100);
+        }
+        if(gp==2){
+        Image bueno1; bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("pill/red pill 3.png"));               
+        animacion = new Animacion();
+        animacion.sumaCuadro(bueno1, 100);
+
+        if (golpes == 3) {
+            destruido = true;
+
+        }
+    }
+    }
     
 }
