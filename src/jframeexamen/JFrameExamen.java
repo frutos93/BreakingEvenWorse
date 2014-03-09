@@ -63,7 +63,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     public void init() {
         setSize(800, 500);
         acabarjuego = false;
-        contbloques = 59;
+        contbloques = 0;
         lista = new LinkedList();
         lista2 = new LinkedList();
         lista3 = new LinkedList();
@@ -387,29 +387,28 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
      *
      */
     public void keyPressed(KeyEvent e) {
-
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+       
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {//Al presionar la flecha izquierda se mueve a la izquierda
             direccion = 3;
             move = true;
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-
-            direccion = 4;
+            direccion = 4; //Al presionar la flecha derecha se mueve la barra a la derecha
             move = true;
-        } else if (e.getKeyCode() == KeyEvent.VK_P) {
+        } else if (e.getKeyCode() == KeyEvent.VK_P) {//Al presionar la P activa la Pausa del juego
             musicafondo = true;
             pausa = !pausa;
-        } else if (e.getKeyCode() == KeyEvent.VK_E && !empezar) {
+        } else if (e.getKeyCode() == KeyEvent.VK_E && !empezar) {//Al presionar la tecla E se empieza el juego
             empezar = true;
-        } else if (e.getKeyCode() == KeyEvent.VK_S && !pausa) {
+        } else if (e.getKeyCode() == KeyEvent.VK_S && !pausa) { //Al presionar la tecla S se apaga/prende el sonido
             musicafondo = !musicafondo;
 
-        } else if (e.getKeyCode() == KeyEvent.VK_I) {
+        } else if (e.getKeyCode() == KeyEvent.VK_I) { //Al presionar la tecla I se muestran/quitan las Instrucciones
             instrucciones = !instrucciones;
-        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) { //Al presionar la barra espaciadora lanza la pelota.
             if (!moverbola && empezar) {
                 moverbola = true;
             }
-        } else if (e.getKeyCode() == KeyEvent.VK_R) {
+        } else if (e.getKeyCode() == KeyEvent.VK_R) { //Al presionar la tecla R reinicia el juego.
             musicafondo = false;
             pausa = false;
             bar.setPosX(getWidth() / 2);
@@ -418,6 +417,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
             bola.setPosY(bar.getPosY() - 25);
             contbloques = 0;
             vidas = 3;
+            score=0;
             lista.clear();
             lista2.clear();
             lista3.clear();
@@ -562,6 +562,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         } else if (vidas > 0) {
             g.drawImage(fondo, 0, 0, this);
             if (lista != null && bar != null) {
+                //Se Pintan todas las pildoras del juego
                 for (Bloque i : lista) {
 
                     g.drawImage(i.getImagenI(), i.getPosX(), i.getPosY(), this);
@@ -579,10 +580,10 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                     g.drawImage(i.getImagenI(), i.getPosX(), i.getPosY(), this);
                 }
 
-                g.drawImage(bola.getImagenI(), bola.getPosX(), bola.getPosY(), this);
-                g.drawImage(bar.getImagenI(), bar.getPosX(), bar.getPosY(), this);
+                g.drawImage(bola.getImagenI(), bola.getPosX(), bola.getPosY(), this);//Pinta la bola
+                g.drawImage(bar.getImagenI(), bar.getPosX(), bar.getPosY(), this);  //Pinta la Barra
 
-                g.setColor(Color.white);
+                g.setColor(Color.white);//Despliega los puntos, las vidas y el comando de Instrucciones
                 g.drawString("Puntos = " + score, 20, 50);
                 g.drawString("Vidas = " + vidas, 20, 70);
                 g.drawString("Presiona I para ver instrucciones.", getWidth() - 200, 50);
@@ -590,10 +591,10 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 //        g.setColor(Color.white);
                 //        g.drawString(pill.getPausado(), pill.getPosX() + pill.getAncho() / 3, pill.getPosY() + pill.getAlto() / 2);
                 //    }
-                if (pausa) {
+                if (pausa) {//Al pausar se despliega una imágen de pausa.
                     g.drawImage(pause, 0, 20, this);
                 }
-                if (instrucciones) {
+                if (instrucciones) {//Al presionar la I se muestran las instrucciones
                     g.drawString("Instrucciones:", 20, 90);
                     g.drawString("Para mover la barra, presiona las teclas de flecha izquierda o derecha.", 20, 110);
                     g.drawString("Presiona R para reiniciar la partida, P para pausar y S para detener la musica.", 20, 130);
@@ -608,9 +609,9 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
             }
 
         } else {
-             g.drawImage(perder, 140, 20, this);
+             g.drawImage(perder, 140, 20, this); //Cuando pierdes se despliega la pantalla de perder
         }
-        if (contbloques == 60) {
+        if (contbloques == 60) { //Cuando ganas se despliega la pantalla de creditos
             acabarjuego = true;
             musicafondo = true;
             g.drawImage(game_over,0,20,this);
