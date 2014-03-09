@@ -20,31 +20,30 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     // Se declaran las variables. 
     private Image dbImage;	// Imagen a proyectar	
     private Graphics dbg;	// Objeto grafico
-    private SoundClip guile;
-    private int contbloques;
-    private Ball bola;
-    private Bloque pill;
-    private BloqueR pillR;// Objeto de la clase Elefante
-    private Barra1 bar;   //Objeto de la clase Raton
-    private boolean musicafondo;
-    private boolean acabarjuego;
-    private int vidas;
-    private Image game_over;        //Imagen de Game-over
-    private Image perder;
-    private Image pause;
-    private int direccion;          //Variable para la dirección del personaje
-    private int score;
-    private boolean move;
-    private boolean pausa;
-    private boolean moverbola;
-    private boolean instrucciones;
-    private boolean empezar;
-    private LinkedList<Bloque> lista;
+    private SoundClip guile;    // Musica de fondo del juego
+    private int contbloques;    // Contador de bloques destruidos
+    private Ball bola;          // Objeto bola.
+    private Bloque pill;        // Objeto Bloque usado para inicializar las listas 1 y 3
+    private BloqueR pillR;      // Objeto BloqueR usado para inicializar las listas 2 y 4
+    private Barra1 bar;         // Objeto barra, es el movido por el jugador.
+    private boolean musicafondo;// Boolean utilizado para correr o pausar la música de fondo
+    private int vidas;          // Contador de vidas
+    private Image game_over;    // Imagen de victoria
+    private Image perder;       // Imagen de derrota
+    private Image pause;        // Imagen usada para la pausa
+    private int direccion;      // Variable para la dirección del personaje
+    private int score;          // Variable de puntuacion
+    private boolean move;       // Variable utilizada para saber si el personaje se esta moviendo o no
+    private boolean pausa;      // Booleano para pausar
+    private boolean moverbola;  // Booleano que indica si la bola se esta moviendo
+    private boolean instrucciones; // Booleano indicado para saber si se estan mostrando las instrucciones
+    private boolean empezar;    // Booleano para comenzar el juego y quitar la pantalla de inicio
+    private LinkedList<Bloque> lista; // Listas de bloques
     private LinkedList<BloqueR> lista2;
     private LinkedList<Bloque> lista3;
     private LinkedList<BloqueR> lista4;
-    private Image fondo;
-    private Image inicio;
+    private Image fondo;        // Imagen de fondo
+    private Image inicio;       // Imagen de inicio
 
     /**
      * Constructor vacio de la clase <code>JFrameExamen</code>.
@@ -190,7 +189,6 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
             }
         }
     }
-    //Just a comment
     /**
      * Metodo <I>actualiza</I>.
      * <P>
