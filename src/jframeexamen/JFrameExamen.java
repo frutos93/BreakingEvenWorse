@@ -23,6 +23,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     private SoundClip payaso;
     private SoundClip snake;
     private SoundClip waka;
+    private int contbloques;
     private Ball bola;
     private Bloque pill;
     private BloqueR pillR;// Objeto de la clase Elefante
@@ -30,6 +31,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     private boolean musicafondo;
     private int vidas;
     private Image game_over;        //Imagen de Game-over
+    private Image ganador;
     private int direccion;          //Variable para la dirección del personaje
     private int score;
     private boolean move;
@@ -61,6 +63,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
      */
     public void init() {
         setSize(800, 500);
+        contbloques=0;
         lista = new LinkedList();
         lista2 = new LinkedList();
         lista3 = new LinkedList();
@@ -130,7 +133,10 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         game_over = Toolkit.getDefaultToolkit().getImage(goURL);
         URL fURL = this.getClass().getResource("Fondo/FondoDos.jpg");
         fondo = Toolkit.getDefaultToolkit().getImage(fURL).getScaledInstance(getWidth(), getHeight(), 1);
+        URL aURL= this.getClass().getResource("pill/impulso.png");
+        ganador= Toolkit.getDefaultToolkit().getImage(aURL).getScaledInstance(getWidth(),getHeight(),1);
         instrucciones = false;
+        
     }
 
     /**
@@ -155,7 +161,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
      */
     public void run() {
 
-        while (vidas > 0) {
+        while (vidas > 0 && contbloques <60) {
             if (musicafondo) {
                 payaso.stop();
                 payaso.setLooping(false);
@@ -237,7 +243,8 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 i.addGolpe();
                 if (i.getGolpes() == 3) {
                     lista.remove(i);
-                    continue;
+                    contbloques++;
+                    break;
                 }
                 i.cambiaimagen(i.getGolpes());
             } else {
@@ -254,8 +261,9 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 }
                 i.addGolpe();
                 if (i.getGolpes() == 3) {
+                    contbloques++;
                     lista2.remove(i);
-                    continue;
+                    break;
                 }
                 i.cambiaimagen(i.getGolpes());
 
@@ -274,8 +282,9 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 }
                 i.addGolpe();
                 if (i.getGolpes() == 3) {
+                    contbloques++;
                     lista3.remove(i);
-                    continue;
+                    break;
                 }
                 i.cambiaimagen(i.getGolpes());
 
@@ -294,8 +303,9 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 }
                 i.addGolpe();
                 if (i.getGolpes() == 3) {
+                    contbloques++;
                     lista4.remove(i);
-                    continue;
+                    break;
                 }
                 i.cambiaimagen(i.getGolpes());
             } else if (!bola.intersecta(i)) {
@@ -515,6 +525,10 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                     g.drawString("Si el personaje cae tres veces, perderas una vida y la dificultad aumentara.", 20, 170);
 
                 }
+                if(contbloques==60){
+                    g.drawImage(ganador, 0,0,this);
+                }
+                
             } else {
                 //Da un mensaje mientras se carga el dibujo	
                 g.drawString("No se cargo la imagen..", 20, 20);
