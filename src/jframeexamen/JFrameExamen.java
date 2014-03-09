@@ -34,6 +34,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     private int score;
     private boolean move;
     private boolean pausa;
+    private boolean moverbola;
     private long tiempoActual;
     
     private boolean instrucciones;
@@ -66,10 +67,11 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         lista4 = new LinkedList();
         pausa = false;
         move = false;
+        moverbola= false;
         musicafondo = false;
         direccion = 0;
         score = 0;                    //puntaje inicial
-        vidas = 5;                    //vidaas iniciales
+        vidas = 3;                    //vidaas iniciales
         payaso = new SoundClip("sounds/pashaso.wav");
         snake = new SoundClip("sounds/snake.wav");
         waka = new SoundClip("sounds/waka.wav");
@@ -204,9 +206,14 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 }
             }
         }
+        if(moverbola){
         bola.setPosX(bola.getPosX() + bola.getVelX());
         bola.setPosY(bola.getPosY() + bola.getVelY());
-
+        }
+        else{
+        bola.setPosX(bar.getPosX()+20);
+        bola.setPosY(bar.getPosY()-30);
+        }
     }
 
     /**
@@ -301,8 +308,14 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
             bola.setVelY(-bola.getVelY());
         } else if (bola.getPosX() + bola.getAncho() > getWidth()) {
             bola.setVelX(-bola.getVelX());
+        } else if(bola.getPosY()>getHeight()){
+            vidas--;
+            moverbola=false;
+            bar.setPosX(getWidth() / 2);
+            bar.setPosY(getHeight() - 30);
+            bola.setPosX(bar.getPosX()+20);
+            bola.setPosY(bar.getPosY()-30);
         }
-
     }
 
     /**
@@ -356,7 +369,11 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
 
         } else if (e.getKeyCode() == KeyEvent.VK_I) {
             instrucciones = !instrucciones;
-        } 
+        } else if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            if(!moverbola){
+                moverbola= true;
+            }    
+        }
     }
 
     public void keyTyped(KeyEvent e) {
