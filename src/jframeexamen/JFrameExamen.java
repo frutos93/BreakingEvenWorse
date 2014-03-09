@@ -132,14 +132,15 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
 
         }
 
-        URL goURL = this.getClass().getResource("pill/creditos.jpg");
+        URL goURL = this.getClass().getResource("barra/creditos.png");
         game_over = Toolkit.getDefaultToolkit().getImage(goURL);
         URL fURL = this.getClass().getResource("Fondo/FondoDos.jpg");
         fondo = Toolkit.getDefaultToolkit().getImage(fURL).getScaledInstance(getWidth(), getHeight(), 1);
-        URL aURL = this.getClass().getResource("pill/impulso.png");
+        URL aURL = this.getClass().getResource("pill/gameover.jpg");
         perder = Toolkit.getDefaultToolkit().getImage(aURL);
         URL gURL = this.getClass().getResource("pill/imagenpausa.jpg");
         pause = Toolkit.getDefaultToolkit().getImage(gURL);
+        
         instrucciones = false;
 
     }
@@ -607,11 +608,13 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
             }
 
         } else {
-             g.drawImage(perder, 0, 20, this);
+             g.drawImage(perder, 140, 20, this);
         }
         if (contbloques == 60) {
             acabarjuego = true;
             musicafondo = true;
+            g.drawImage(game_over,0,20,this);
+            
         }
     }
 
