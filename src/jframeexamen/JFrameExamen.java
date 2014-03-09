@@ -237,7 +237,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 i.addGolpe();
                 if (i.getGolpes() == 3) {
                     lista.remove(i);
-                    continue;
+                    break;
                 }
                 i.cambiaimagen(i.getGolpes());
             } else {
@@ -255,7 +255,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 i.addGolpe();
                 if (i.getGolpes() == 3) {
                     lista2.remove(i);
-                    continue;
+                    break;
                 }
                 i.cambiaimagen(i.getGolpes());
 
@@ -275,7 +275,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 i.addGolpe();
                 if (i.getGolpes() == 3) {
                     lista3.remove(i);
-                    continue;
+                    break;
                 }
                 i.cambiaimagen(i.getGolpes());
 
@@ -295,7 +295,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 i.addGolpe();
                 if (i.getGolpes() == 3) {
                     lista4.remove(i);
-                    continue;
+                    break;
                 }
                 i.cambiaimagen(i.getGolpes());
             } else if (!bola.intersecta(i)) {
