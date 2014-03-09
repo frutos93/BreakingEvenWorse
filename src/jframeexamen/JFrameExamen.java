@@ -190,7 +190,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
             }
         }
     }
-
+    //Just a comment
     /**
      * Metodo <I>actualiza</I>.
      * <P>
