@@ -36,7 +36,6 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     private boolean pausa;
     private boolean moverbola;
     private long tiempoActual;
-
     private boolean instrucciones;
 
     private LinkedList<Bloque> lista;
@@ -244,7 +243,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 i.setChoca(false);
             }
         }
-        for (BloqueR i : lista2) {
+        for (BloqueR i : lista2) {            
             if (bola.intersecta(i) && !i.getChoca()) {
                 i.setChoca(true);
                 if (i.getPosY() < bola.getPosY() + bola.getAlto() || i.getPosY() + i.getAlto() > bola.getPosY()) { //por arriba o por abajo
@@ -264,7 +263,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
             }
         }
         for (Bloque i : lista3) {
-            if (bola.intersecta(i) && !i.getChoca()) {
+            if (bola.intersecta(i) && !i.getChoca() ) {
                 i.setChoca(true);
                 if (i.getPosY() < bola.getPosY() + bola.getAlto() || i.getPosY() + i.getAlto() > bola.getPosY()) { //por arriba o por abajo
                     bola.setVelY(-bola.getVelY());
@@ -278,7 +277,6 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                     break;
                 }
                 i.cambiaimagen(i.getGolpes());
-
             } else {
                 i.setChoca(false);
             }
