@@ -20,7 +20,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     // Se declaran las variables. 
     private Image dbImage;	// Imagen a proyectar	
     private Graphics dbg;	// Objeto grafico
-    private SoundClip payaso;
+    private SoundClip guile;
     private SoundClip snake;
     private SoundClip waka;
     private int contbloques;
@@ -76,8 +76,8 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         direccion = 0;
         score = 0;                    //puntaje inicial
         vidas = 3;                    //vidaas iniciales
-        payaso = new SoundClip("sounds/XkyGuile.mid");
-        snake = new SoundClip("sounds/snake.wav");
+        guile = new SoundClip("sounds/SF2Guile.mid");
+        snake = new SoundClip("sounds/tazdingo.mp3");
         waka = new SoundClip("sounds/waka.wav");
         bar = new Barra1(getWidth() / 2, getHeight() - 30);
         setBackground(Color.black);
@@ -147,8 +147,8 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
      */
     public void start() {
         // Declaras un hilo
-        payaso.setLooping(true);
-        payaso.play();
+        guile.setLooping(true);
+        guile.play();
         Thread th = new Thread(this);
         // Empieza el hilo
         th.start();
@@ -165,12 +165,12 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
 
         while (vidas > 0 && !acabarjuego) {
             if (musicafondo) {
-                payaso.stop();
-                payaso.setLooping(false);
+                guile.stop();
+                guile.setLooping(false);
             } else {
-                if (!payaso.getLooping()) {
-                    payaso.setLooping(true);
-                    payaso.play();
+                if (!guile.getLooping()) {
+                    guile.setLooping(true);
+                    guile.play();
                 }
             }
             if (!pausa) {
@@ -249,6 +249,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                     break;
                 }
                 i.cambiaimagen(i.getGolpes());
+                snake.play();
             } else {
                 i.setChoca(false);
             }
@@ -268,7 +269,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                     break;
                 }
                 i.cambiaimagen(i.getGolpes());
-
+                snake.play();
             } else if (!bola.intersecta(i)) {
                 i.setChoca(false);
             }
@@ -288,6 +289,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                     lista3.remove(i);
                     break;
                 }
+                snake.play();
                 i.cambiaimagen(i.getGolpes());
             } else {
                 i.setChoca(false);
@@ -308,6 +310,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                     lista4.remove(i);
                     break;
                 }
+                snake.play();
                 i.cambiaimagen(i.getGolpes());
             } else if (!bola.intersecta(i)) {
                 i.setChoca(false);
@@ -525,7 +528,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 //    }
                 if (instrucciones) {
                     g.drawString("Instrucciones:", 20, 90);
-                    g.drawString("Haz click en el personaje para lanzarlo. Tu objetivo es atraparlo con la mano. Si lo haces, obtendras puntos.", 20, 110);
+                    g.drawString("Presiona la ", 20, 110);
                     g.drawString("Para mover la mano, presiona las teclas de flecha izquierda o derecha.", 20, 130);
                     g.drawString("Presiona G para guardar tu partida, C para cargar, P para pausar y S para detener la musica.", 20, 150);
                     g.drawString("Si el personaje cae tres veces, perderas una vida y la dificultad aumentara.", 20, 170);
