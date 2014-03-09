@@ -21,8 +21,6 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     private Image dbImage;	// Imagen a proyectar	
     private Graphics dbg;	// Objeto grafico
     private SoundClip guile;
-    private SoundClip snake;
-    private SoundClip waka;
     private int contbloques;
     private Ball bola;
     private Bloque pill;
@@ -39,14 +37,14 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     private boolean move;
     private boolean pausa;
     private boolean moverbola;
-    private long tiempoActual;
     private boolean instrucciones;
-
+    private boolean empezar;
     private LinkedList<Bloque> lista;
     private LinkedList<BloqueR> lista2;
     private LinkedList<Bloque> lista3;
     private LinkedList<BloqueR> lista4;
     private Image fondo;
+    private Image inicio;
 
     /**
      * Constructor vacio de la clase <code>JFrameExamen</code>.
@@ -78,8 +76,6 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         score = 0;                    //puntaje inicial
         vidas = 3;                    //vidaas iniciales
         guile = new SoundClip("sounds/SF2Guile.mid");
-        snake = new SoundClip("sounds/tazdingo.mp3");
-        waka = new SoundClip("sounds/waka.wav");
         bar = new Barra1(getWidth() / 2, getHeight() - 30);
         bar.setPosX(getWidth() / 2 - bar.getAncho() / 2);
         setBackground(Color.black);
@@ -142,6 +138,9 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         pause = Toolkit.getDefaultToolkit().getImage(gURL);
         
         instrucciones = false;
+        empezar = false;
+        URL emp = this.getClass().getResource("barra/Login.png");
+        inicio = Toolkit.getDefaultToolkit().getImage(emp);
 
     }
 
@@ -167,7 +166,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
      *
      */
     public void run() {
-        
+
         while (true) {
             if (musicafondo) {
                 guile.stop();
@@ -178,7 +177,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                     guile.play();
                 }
             }
-            if (!pausa) {
+            if (!pausa && empezar) {
                 actualiza();
                 checaColision();
             }
@@ -199,12 +198,6 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
      * ya sea por presionar una tecla o por moverlos con el mouse.
      */
     public void actualiza() {
-
-        long tiempoTranscurrido = System.currentTimeMillis() - tiempoActual;
-        tiempoActual += tiempoTranscurrido;
-        pill.actualiza(tiempoTranscurrido);
-        bar.actualiza(tiempoTranscurrido);
-
         if (move) {
             bar.setMoviendose(true);
             switch (direccion) {
@@ -251,10 +244,11 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 if (i.getGolpes() == 3) {
                     lista.remove(i);
                     contbloques++;
+                    score += 20;
                     break;
                 }
                 i.cambiaimagen(i.getGolpes());
-                snake.play();
+                score += 10;
             } else {
                 i.setChoca(false);
             }
@@ -271,10 +265,11 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 if (i.getGolpes() == 3) {
                     contbloques++;
                     lista2.remove(i);
+                    score += 20;
                     break;
                 }
                 i.cambiaimagen(i.getGolpes());
-                snake.play();
+                score += 10;
             } else if (!bola.intersecta(i)) {
                 i.setChoca(false);
             }
@@ -292,9 +287,10 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 if (i.getGolpes() == 3) {
                     contbloques++;
                     lista3.remove(i);
+                    score += 20;
                     break;
                 }
-                snake.play();
+                score += 10;
                 i.cambiaimagen(i.getGolpes());
             } else {
                 i.setChoca(false);
@@ -313,9 +309,10 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 if (i.getGolpes() == 3) {
                     contbloques++;
                     lista4.remove(i);
+                    score += 20;
                     break;
                 }
-                snake.play();
+                score += 10;
                 i.cambiaimagen(i.getGolpes());
             } else if (!bola.intersecta(i)) {
                 i.setChoca(false);
@@ -351,7 +348,6 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 bola.setVelX((int) (Math.random() * 10) - 5);
             }
             bola.setVelY(-4);
-            snake.play();
         }
     }
 
@@ -402,72 +398,74 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         } else if (e.getKeyCode() == KeyEvent.VK_P) {
             musicafondo = true;
             pausa = !pausa;
+        } else if (e.getKeyCode() == KeyEvent.VK_E && !empezar) {
+            empezar = true;
         } else if (e.getKeyCode() == KeyEvent.VK_S && !pausa) {
             musicafondo = !musicafondo;
 
         } else if (e.getKeyCode() == KeyEvent.VK_I) {
             instrucciones = !instrucciones;
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            if (!moverbola) {
+            if (!moverbola && empezar) {
                 moverbola = true;
             }
         } else if (e.getKeyCode() == KeyEvent.VK_R) {
-            musicafondo=false;
-            pausa=false;
-            bar.setPosX(getWidth()/2);
-            bar.setPosY(getHeight()-30);
+            musicafondo = false;
+            pausa = false;
+            bar.setPosX(getWidth() / 2);
+            bar.setPosY(getHeight() - 30);
             bola.setPosX(bar.getPosX() + 25);
             bola.setPosY(bar.getPosY() - 25);
-            contbloques=0;
-            vidas=3;
+            contbloques = 0;
+            vidas = 3;
             lista.clear();
             lista2.clear();
             lista3.clear();
             lista4.clear();
-             for (int i = 1; i < 15; i++) {
-            if (i == 1) {
-                pill = new Bloque(40, 70);
-                lista.add(pill);
-            } else {
-                Bloque pillaux = (Bloque) lista.get(i - 2);
-                pill = new Bloque(pillaux.getPosX() + 50, pillaux.getPosY());
-                lista.add(pill);
-            }
+            for (int i = 1; i < 15; i++) {
+                if (i == 1) {
+                    pill = new Bloque(40, 70);
+                    lista.add(pill);
+                } else {
+                    Bloque pillaux = (Bloque) lista.get(i - 2);
+                    pill = new Bloque(pillaux.getPosX() + 50, pillaux.getPosY());
+                    lista.add(pill);
+                }
 
-        }
-        for (int i = 1; i < 15; i++) {
-            if (i == 1) {
-                pillR = new BloqueR(40, 120);
-                lista2.add(pillR);
-            } else {
-                BloqueR pillaux = (BloqueR) lista2.get(i - 2);
-                pillR = new BloqueR(pillaux.getPosX() + 50, pillaux.getPosY());
-                lista2.add(pillR);
             }
+            for (int i = 1; i < 15; i++) {
+                if (i == 1) {
+                    pillR = new BloqueR(40, 120);
+                    lista2.add(pillR);
+                } else {
+                    BloqueR pillaux = (BloqueR) lista2.get(i - 2);
+                    pillR = new BloqueR(pillaux.getPosX() + 50, pillaux.getPosY());
+                    lista2.add(pillR);
+                }
 
-        }
-        for (int i = 1; i < 15; i++) {
-            if (i == 1) {
-                pill = new Bloque(40, 170);
-                lista3.add(pill);
-            } else {
-                Bloque pillaux = (Bloque) lista3.get(i - 2);
-                pill = new Bloque(pillaux.getPosX() + 50, pillaux.getPosY());
-                lista3.add(pill);
             }
+            for (int i = 1; i < 15; i++) {
+                if (i == 1) {
+                    pill = new Bloque(40, 170);
+                    lista3.add(pill);
+                } else {
+                    Bloque pillaux = (Bloque) lista3.get(i - 2);
+                    pill = new Bloque(pillaux.getPosX() + 50, pillaux.getPosY());
+                    lista3.add(pill);
+                }
 
-        }
-        for (int i = 1; i < 15; i++) {
-            if (i == 1) {
-                pillR = new BloqueR(40, 220);
-                lista4.add(pillR);
-            } else {
-                BloqueR pillaux = (BloqueR) lista4.get(i - 2);
-                pillR = new BloqueR(pillaux.getPosX() + 50, pillaux.getPosY());
-                lista4.add(pillR);
             }
+            for (int i = 1; i < 15; i++) {
+                if (i == 1) {
+                    pillR = new BloqueR(40, 220);
+                    lista4.add(pillR);
+                } else {
+                    BloqueR pillaux = (BloqueR) lista4.get(i - 2);
+                    pillR = new BloqueR(pillaux.getPosX() + 50, pillaux.getPosY());
+                    lista4.add(pillR);
+                }
 
-        }
+            }
         }
     }
 
@@ -559,7 +557,9 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
      * @paramg es el <code>objeto grafico</code> usado para dibujar.
      */
     public void paint1(Graphics g) {
-        if (vidas > 0) {
+        if (!empezar && inicio != null) {
+            g.drawImage(inicio, 0, 0, this);
+        } else if (vidas > 0) {
             g.drawImage(fondo, 0, 0, this);
             if (lista != null && bar != null) {
                 for (Bloque i : lista) {
