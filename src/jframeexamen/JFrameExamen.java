@@ -29,6 +29,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     private BloqueR pillR;// Objeto de la clase Elefante
     private Barra1 bar;   //Objeto de la clase Raton
     private boolean musicafondo;
+    private boolean acabarjuego;
     private int vidas;
     private Image game_over;        //Imagen de Game-over
     private Image ganador;
@@ -62,7 +63,8 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
      */
     public void init() {
         setSize(800, 500);
-        contbloques=0;
+        acabarjuego=false;
+        contbloques=59;
         lista = new LinkedList();
         lista2 = new LinkedList();
         lista3 = new LinkedList();
@@ -133,7 +135,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         URL fURL = this.getClass().getResource("Fondo/FondoDos.jpg");
         fondo = Toolkit.getDefaultToolkit().getImage(fURL).getScaledInstance(getWidth(), getHeight(), 1);
         URL aURL= this.getClass().getResource("pill/impulso.png");
-        ganador= Toolkit.getDefaultToolkit().getImage(aURL).getScaledInstance(getWidth(),getHeight(),1);
+        ganador= Toolkit.getDefaultToolkit().getImage(aURL);
         instrucciones = false;
         
     }
@@ -161,7 +163,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
      */
     public void run() {
 
-        while (vidas > 0 && contbloques <60) {
+        while (vidas > 0 && !acabarjuego) {
             if (musicafondo) {
                 payaso.stop();
                 payaso.setLooping(false);
@@ -529,9 +531,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                     g.drawString("Si el personaje cae tres veces, perderas una vida y la dificultad aumentara.", 20, 170);
 
                 }
-                if(contbloques==60){
-                    g.drawImage(ganador, 0,0,this);
-                }
+
                 
             } else {
                 //Da un mensaje mientras se carga el dibujo	
@@ -541,6 +541,11 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         } else {
             g.drawImage(game_over, getWidth() / 5, 0, this);
         }
+        if(contbloques==60){
+             acabarjuego=true;
+             musicafondo= true;
+             g.drawImage(ganador, 0,0,this);
+         }
     }
 
 }
