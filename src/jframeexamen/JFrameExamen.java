@@ -80,11 +80,12 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         snake = new SoundClip("sounds/tazdingo.mp3");
         waka = new SoundClip("sounds/waka.wav");
         bar = new Barra1(getWidth() / 2, getHeight() - 30);
+        bar.setPosX(getWidth()/2 - bar.getAncho()/2);
         setBackground(Color.black);
         addKeyListener(this);
         addMouseListener(this);
         addMouseMotionListener(this);
-        bola = new Ball(bar.getPosX() + 20, bar.getPosY() - 30);
+        bola = new Ball(bar.getPosX() + 25, bar.getPosY() - 25);
         for (int i = 1; i < 15; i++) {
             if (i == 1) {
                 pill = new Bloque(40, 70);
