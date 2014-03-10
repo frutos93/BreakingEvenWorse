@@ -88,40 +88,40 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 lista.add(pill);
             } else {
                 Bloque pillaux = (Bloque) lista.get(i - 2);
-                pill = new Bloque(pillaux.getPosX() + 50, pillaux.getPosY());
+                pill = new Bloque(pillaux.getPosX() + 40, pillaux.getPosY());
                 lista.add(pill);
             }
 
         }
         for (int i = 1; i < 15; i++) {
             if (i == 1) {
-                pillR = new BloqueR(40, 120);
+                pillR = new BloqueR(40, 110);
                 lista2.add(pillR);
             } else {
                 BloqueR pillaux = (BloqueR) lista2.get(i - 2);
-                pillR = new BloqueR(pillaux.getPosX() + 50, pillaux.getPosY());
+                pillR = new BloqueR(pillaux.getPosX() + 40, pillaux.getPosY());
                 lista2.add(pillR);
             }
 
         }
         for (int i = 1; i < 15; i++) {
             if (i == 1) {
-                pill = new Bloque(40, 170);
+                pill = new Bloque(40, 150);
                 lista3.add(pill);
             } else {
                 Bloque pillaux = (Bloque) lista3.get(i - 2);
-                pill = new Bloque(pillaux.getPosX() + 50, pillaux.getPosY());
+                pill = new Bloque(pillaux.getPosX() + 40, pillaux.getPosY());
                 lista3.add(pill);
             }
 
         }
         for (int i = 1; i < 15; i++) {
             if (i == 1) {
-                pillR = new BloqueR(40, 220);
+                pillR = new BloqueR(40, 190);
                 lista4.add(pillR);
             } else {
                 BloqueR pillaux = (BloqueR) lista4.get(i - 2);
-                pillR = new BloqueR(pillaux.getPosX() + 50, pillaux.getPosY());
+                pillR = new BloqueR(pillaux.getPosX() + 40, pillaux.getPosY());
                 lista4.add(pillR);
             }
 
@@ -585,6 +585,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 g.drawString("Puntos = " + score, 20, 50);
                 g.drawString("Vidas = " + vidas, 20, 70);
                 g.drawString("Presiona I para ver instrucciones.", getWidth() - 200, 50);
+                g.drawString("Bloques destruidos: "+contbloques,20,90);
                 //    if (pausa) {
                 //        g.setColor(Color.white);
                 //        g.drawString(pill.getPausado(), pill.getPosX() + pill.getAncho() / 3, pill.getPosY() + pill.getAlto() / 2);
@@ -609,7 +610,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         } else {
              g.drawImage(perder, 140, 20, this); //Cuando pierdes se despliega la pantalla de perder
         }
-        if (contbloques == 60) { //Cuando ganas se despliega la pantalla de creditos
+        if (contbloques >= 56) { //Cuando ganas se despliega la pantalla de creditos
             //acabarjuego = true;
             musicafondo = true;
             g.drawImage(game_over,0,20,this);
