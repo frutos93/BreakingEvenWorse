@@ -139,7 +139,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         perder = Toolkit.getDefaultToolkit().getImage(aURL);
         URL gURL = this.getClass().getResource("pill/imagenpausa.jpg");
         pause = Toolkit.getDefaultToolkit().getImage(gURL);
-        
+
         instrucciones = false;
         empezar = false;
         URL emp = this.getClass().getResource("barra/Login.png");
@@ -193,6 +193,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
             }
         }
     }
+
     /**
      * Metodo <I>actualiza</I>.
      * <P>
@@ -247,12 +248,12 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                     lista.remove(i);
                     contbloques++;
                     score += 20;
-                    if(!musicafondo){
-                    tazdingo.play();
+                    if (!musicafondo) {
+                        tazdingo.play();
                     }
                     break;
                 }
-                if(!musicafondo){
+                if (!musicafondo) {
                     coin.play();
                 }
                 i.cambiaimagen(i.getGolpes());
@@ -274,12 +275,12 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                     contbloques++;
                     lista2.remove(i);
                     score += 20;
-                    if(!musicafondo){
-                    tazdingo.play();
+                    if (!musicafondo) {
+                        tazdingo.play();
                     }
                     break;
                 }
-                if(!musicafondo){
+                if (!musicafondo) {
                     coin.play();
                 }
                 i.cambiaimagen(i.getGolpes());
@@ -301,13 +302,13 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 if (i.getGolpes() == 3) {
                     contbloques++;
                     lista3.remove(i);
-                    if(!musicafondo){
-                    tazdingo.play();
+                    if (!musicafondo) {
+                        tazdingo.play();
                     }
                     score += 20;
                     break;
                 }
-                if(!musicafondo){
+                if (!musicafondo) {
                     coin.play();
                 }
                 score += 10;
@@ -330,12 +331,12 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                     contbloques++;
                     lista4.remove(i);
                     score += 20;
-                    if(!musicafondo){
-                    tazdingo.play();
+                    if (!musicafondo) {
+                        tazdingo.play();
                     }
                     break;
                 }
-                if(!musicafondo){
+                if (!musicafondo) {
                     coin.play();
                 }
                 score += 10;
@@ -413,7 +414,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
      *
      */
     public void keyPressed(KeyEvent e) {
-       
+
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {//Al presionar la flecha izquierda se mueve a la izquierda
             direccion = 3;
             move = true;
@@ -443,7 +444,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
             bola.setPosY(bar.getPosY() - 25);
             contbloques = 0;
             vidas = 3;
-            score=0;
+            score = 0;
             lista.clear();
             lista2.clear();
             lista3.clear();
@@ -609,11 +610,11 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 g.drawImage(bola.getImagenI(), bola.getPosX(), bola.getPosY(), this);//Pinta la bola
                 g.drawImage(bar.getImagenI(), bar.getPosX(), bar.getPosY(), this);  //Pinta la Barra
 
-                g.setColor(Color.white);//Despliega los puntos, las vidas y el comando de Instrucciones
+                g.setColor(Color.black);//Despliega los puntos, las vidas y el comando de Instrucciones
                 g.drawString("Puntos = " + score, 20, 50);
                 g.drawString("Vidas = " + vidas, 20, 70);
                 g.drawString("Presiona I para ver instrucciones.", getWidth() - 200, 50);
-                g.drawString("Bloques destruidos: "+contbloques,20,90);
+                g.drawString("Bloques destruidos: " + contbloques, 20, 90);
                 //    if (pausa) {
                 //        g.setColor(Color.white);
                 //        g.drawString(pill.getPausado(), pill.getPosX() + pill.getAncho() / 3, pill.getPosY() + pill.getAlto() / 2);
@@ -636,13 +637,13 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
             }
 
         } else {
-             g.drawImage(perder, 140, 20, this); //Cuando pierdes se despliega la pantalla de perder
+            g.drawImage(perder, 140, 20, this); //Cuando pierdes se despliega la pantalla de perder
         }
         if (contbloques >= 56) { //Cuando ganas se despliega la pantalla de creditos
             //acabarjuego = true;
             musicafondo = true;
-            g.drawImage(game_over,0,20,this);
-            
+            g.drawImage(game_over, 0, 20, this);
+
         }
     }
 

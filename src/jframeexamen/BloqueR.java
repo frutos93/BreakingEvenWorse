@@ -9,7 +9,7 @@ public class BloqueR extends Base {
 
     public BloqueR(int posX, int posY) {
         super(posX, posY);
-        Image bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("pill/red pill 1.png")).getScaledInstance(40, 50, 1);
+        Image bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("pill/red pill 1.png")).getScaledInstance(40, 32, 1);
         animacion = new Animacion();
         animacion.sumaCuadro(bueno1, 100);
 
@@ -39,13 +39,13 @@ public class BloqueR extends Base {
     public void cambiaimagen(int gp) {
         if (gp == 1) {
             Image bueno1;
-            bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("pill/red pill 2.png")).getScaledInstance(40, 50, 1);
+            bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("pill/red pill 2.png")).getScaledInstance(40, 32, 1);
             animacion = new Animacion();
             animacion.sumaCuadro(bueno1, 100);
         }
         if (gp == 2) {
             Image bueno1;
-            bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("pill/red pill 3.png")).getScaledInstance(40, 50, 1);
+            bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("pill/red pill 3.png")).getScaledInstance(40, 32, 1);
             animacion = new Animacion();
             animacion.sumaCuadro(bueno1, 100);
         }
