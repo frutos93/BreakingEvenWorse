@@ -11,7 +11,7 @@ public class Ball extends Base {
 
     public Ball(int posX, int posY) {
         super(posX, posY);
-        Image malo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("pill/BolaDos.png")).getScaledInstance(25, 25, 1);
+        Image malo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("pill/BolaDos.png")).getScaledInstance(20, 20, 1);
         animacion = new Animacion();
         animacion.sumaCuadro(malo1, 100);
         velX = 0;

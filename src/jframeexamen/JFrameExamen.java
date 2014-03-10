@@ -1,6 +1,7 @@
 package jframeexamen;
 
 import JFrameExamen.SoundClip;
+
 import javax.swing.JFrame;
 import java.awt.Graphics;
 import java.awt.Image;
