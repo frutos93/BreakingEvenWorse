@@ -21,6 +21,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
     private Image dbImage;	// Imagen a proyectar	
     private Graphics dbg;	// Objeto grafico
     private SoundClip guile;    // Musica de fondo del juego
+    private SoundClip tazdingo;
     private int contbloques;    // Contador de bloques destruidos
     private Ball bola;          // Objeto bola.
     private Bloque pill;        // Objeto Bloque usado para inicializar las listas 1 y 3
@@ -75,6 +76,7 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
         score = 0;                    //puntaje inicial
         vidas = 3;                    //vidaas iniciales
         guile = new SoundClip("sounds/guile.wav");
+        tazdingo = new SoundClip("sounds/tazdingo.wav");
         bar = new Barra1(getWidth() / 2, getHeight() - 30);
         bar.setPosX(getWidth() / 2 - bar.getAncho() / 2);
         setBackground(Color.black);
@@ -243,6 +245,9 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                     lista.remove(i);
                     contbloques++;
                     score += 20;
+                    if(!musicafondo){
+                    tazdingo.play();
+                    }
                     break;
                 }
                 i.cambiaimagen(i.getGolpes());
@@ -264,6 +269,9 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                     contbloques++;
                     lista2.remove(i);
                     score += 20;
+                    if(!musicafondo){
+                    tazdingo.play();
+                    }
                     break;
                 }
                 i.cambiaimagen(i.getGolpes());
@@ -285,6 +293,9 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                 if (i.getGolpes() == 3) {
                     contbloques++;
                     lista3.remove(i);
+                    if(!musicafondo){
+                    tazdingo.play();
+                    }
                     score += 20;
                     break;
                 }
@@ -308,6 +319,9 @@ public class JFrameExamen extends JFrame implements Runnable, KeyListener, Mouse
                     contbloques++;
                     lista4.remove(i);
                     score += 20;
+                    if(!musicafondo){
+                    tazdingo.play();
+                    }
                     break;
                 }
                 score += 10;
